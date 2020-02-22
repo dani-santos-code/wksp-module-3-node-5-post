@@ -4,7 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 
-const { handleOrder } = require("./handlers");
+const { handleOrder, handleConfirmation } = require("./handlers");
 const PORT = process.env.PORT || 8000;
 
 const app = express();
@@ -25,6 +25,6 @@ app.set("view engine", "ejs");
 
 // endpoints
 app.post("/order", handleOrder);
-// app.get("/order-confirmed", handleConfirmation);
+app.get("/order-confirmed", handleConfirmation);
 app.get("*", (req, res) => res.send("Dang. 404."));
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
