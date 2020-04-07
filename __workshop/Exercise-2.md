@@ -1,6 +1,6 @@
 # Exercise 2
 
-Take a look at the form that is available at [`/order-form`](http://localhost:8000/user-form). The form itself in in the `public` folder.
+Take a look at the form that is available at [`/order-form`](http://localhost:8000/order-form). The form itself in in the `public` folder.
 
 It is an order form for promotional products. Users need to fill out the complete form. All fields are required.
 
@@ -11,8 +11,8 @@ For this exercise, you will need to create the endpoint that this form submits t
 ### Validation
 
 1. Validate that the user has not yet placed an order. We cannot know this with 100% accuracy, but we can refuse users
-    - whose name is already in our database.
-    - whose address matches an address already in our database. Use only the street number and name for this.
+   - whose name is already in our database.
+   - whose address matches an address already in our database. Use only the street number and name for this.
 2. Validate that delivery address is within Canada. We only ship to Canada!
 3. Validate that the item selected is actually in stock.
 
@@ -42,10 +42,10 @@ You should only send an error code if there actually is an error.
 
 Take a look at the `promo.js` in the `data` folder. This is your _database_. It containd current stock levels as well as past customers... Business isn't exactly booming.
 
-You will need to import this data wherever you need to use it. At the top of the file you can require them with 
+You will need to import this data wherever you need to use it. At the top of the file you can require them with
 
 ```js
-const { stock, customers } = require('<PATH_TO_FILE>');
+const { stock, customers } = require("<PATH_TO_FILE>");
 ```
 
 ### Required endpoints
@@ -53,9 +53,8 @@ const { stock, customers } = require('<PATH_TO_FILE>');
 The form communicates with the following endpoints:
 
 - `/order` (`POST` --> send the order details in an object.)
-- `/order-confirmation` (`GET` --> displays an order confirmation page.)
+- `/order-confirmed` (`GET` --> displays an order confirmation page.)
 
 ## Extra
 
 If you feel inclined, you could create a better order confirmation page. It would be cool for that page to render they're order information.
-

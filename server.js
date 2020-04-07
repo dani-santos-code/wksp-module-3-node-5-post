@@ -1,25 +1,30 @@
-'use strict';
+"use strict";
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
+const express = require("express");
+const bodyParser = require("body-parser");
+const morgan = require("morgan");
 
+const { handleOrder, handleConfirmation } = require("./handlers");
 const PORT = process.env.PORT || 8000;
 
+const app = express();
 
-express()
-    .use(function(req, res, next) {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        next();
-    })
-	.use(morgan('tiny'))
-	.use(express.static('public'))
-    .use(bodyParser.json())
-    .use(express.urlencoded({extended: false}))
-    .set('view engine', 'ejs')
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+app.use(morgan("tiny"));
+app.use(express.static("public"));
+app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
+app.set("view engine", "ejs");
 
-    // endpoints
-
-    .get('*', (req, res) => res.send('Dang. 404.'))
-    .listen(PORT, () => console.log(`Listening on port ${PORT}`));
+// endpoints
+app.post("/order", handleOrder);
+app.get("/order-confirmed", handleConfirmation);
+app.get("*", (req, res) => res.send("Dang. 404."));
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
